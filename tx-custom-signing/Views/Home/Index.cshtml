@@ -1,0 +1,22 @@
+﻿@using TXTextControl.Web.MVC.DocumentViewer
+
+@Html.TXTextControl().DocumentViewer(settings => {
+	   settings.DocumentPath = "App_Data\\template.tx";
+	   settings.SignatureSettings = new SignatureSettings() {
+			ShowSignatureBar = true,
+			OwnerName = "Josh Jackson",
+			SignerName = "Tim Typer",
+			SignerInitials = "TT",
+			UniqueId = "12345-12345-12345-12345",
+			RedirectUrlAfterSignature = this.Url.Action(
+				"HandleSignature",
+				"Signature",
+				null,
+				Context.Request.Scheme,
+				null),
+			SignatureBoxes = new SignatureBox[] {
+				new SignatureBox("txsign") { SigningRequired = true, Style = SignatureBox.SignatureBoxStyle.Signature },
+				new SignatureBox("txsigninit") { SigningRequired = true, Style = SignatureBox.SignatureBoxStyle.Initials }
+			}};
+}).Render()
+
